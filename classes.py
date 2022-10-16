@@ -23,7 +23,7 @@ class Musterija(Korisnik):
         self.stanje= stanje
         
     def greating(self):    
-        return f'Moje ime je {self.ime} i ja imam {self.godine} godina. Stanje na računu je {self.stanje}, što znači, u kurcu si.'            
+        return f'Moje ime je {self.ime} i ja imam {self.godine} godina. Stanje na računu je {self.stanje}.'            
         
 # Init user object
 danny= Korisnik('Danijel Dupor', 23, 'sitnajaja@gmail.com')
