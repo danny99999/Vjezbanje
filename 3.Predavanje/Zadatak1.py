@@ -12,8 +12,12 @@ async def get_fact(request):
                 tasks.append(asyncio.create_task(session.get('https://catfact.ninja/fact')))
                 res= await asyncio.gather(*tasks)
                 res= [await x.json() for x in res]
-                tasks = []
-                asyncio with aiohttp.ClientSession
+                tasks=[]
+                async with aiohttp.ClientSession() as session:
+                    for i in range(len(res)):
+                        tasks.append(asyncio.create_task(session.post("http://0.0.0.0:8081/saveFact", json=res[i])))
+                    res= await asyncio.gather(*tasks)
+                    res= [await x.json() for x in res]
             return web.json_response({'status':'OK'}, status=200)
  
 
@@ -21,4 +25,4 @@ async def get_fact(request):
 
 app = web.Application()
 app.router.add_routes(routes)
-web.run_app(app, port=8080)    
+web.run_app(app, port=8082)    

@@ -22,12 +22,11 @@ async def get_artikl(request):
     print(data)
     """
     q=request.query.get('ime')
-    data= request.query.get('ime')
-    res= [d for d in data if d.get('ime')== q]
+    res= [d for d in temp if d.get('ime')== q]
     return web.json_response({'status': 'OK', 'data': res}, status=200)
 @routes.post('/artikl')
 async def post_artikl(request):
-    json_data= request.json()
+    json_data= await request.json()
     print(json_data)
     print(type(json_data))
     temp.append(json_data)
@@ -35,4 +34,4 @@ async def post_artikl(request):
 
 app = web.Application()
 app.router.add_routes(routes)
-web.run_app(app)    
+web.run_app(app, port= 8082)    

@@ -11,7 +11,7 @@ async def get_handler(request):
         async with aiohttp.ClientSession as session:
             for _ in range(5):
                 tasks.append(asyncio.create_task(session.get('https://google.com')))
-                res= await asyncio.gather(tasks)
+                res= await asyncio.gather(*tasks)
                 res= [await len(x.text()) for x in res]
                 print(res)
             return web.json_response({'status':'OK'}, status=200)
